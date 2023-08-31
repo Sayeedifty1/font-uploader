@@ -1,4 +1,4 @@
-import { useState } from "react";
+import  { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { BsCloudUpload } from "react-icons/bs";
 
@@ -6,7 +6,7 @@ const FontUploader = () => {
     const [uploadedFonts, setUploadedFonts] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleFontDrop = (acceptedFiles) => {
+    const handleFontDrop = async (acceptedFiles) => {
         const ttfFiles = acceptedFiles.filter(file => file.name.endsWith('.ttf'));
 
         if (ttfFiles.length === 0) {
@@ -14,14 +14,36 @@ const FontUploader = () => {
         } else {
             setUploadedFonts(ttfFiles);
             setErrorMessage('');
+
+            const formData = new FormData();
+            ttfFiles.forEach(file => {
+                formData.append('fonts[]', file);
+            });
+
+            try {
+                const response = await fetch('http://localhost/font-uploader-server/', {
+                    method: 'POST',
+                    body: formData,
+                });
+            
+                const responseText = await response.text();
+                console.log(responseText); // Inspect the response content
+            
+                const responseData = JSON.parse(responseText);
+                console.log(responseData); // Handle the server response if needed
+            } catch (error) {
+                console.error('Error uploading fonts:', error);
+            }
+            
         }
     };
+    
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: handleFontDrop,
         accept: ".ttf",
     });
-    console.log(uploadedFonts)
+console.log(uploadedFonts)
     return (
         <div>
             <div {...getRootProps()} className="w-[70%] mx-auto lg:w-auto lg:px-56 py-28 rounded-md border-dashed border-2 bg-gray-50 font-serif flex flex-col items-center gap-2 cursor-pointer">
