@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 
 const FontList = () => {
@@ -36,8 +36,21 @@ const FontList = () => {
   ];
 
   const handleDelete = fontName => {
-    // Implement delete logic here
-    console.log(`Deleting font: ${fontName}`);
+    // Send a DELETE request to the backend to delete the font
+    fetch(`http://localhost/font-uploader-server/upload-fonts.php?fontName=${encodeURIComponent(fontName)}`, {
+      method: "DELETE",
+    })
+      .then(response => {
+        if (response.ok) {
+          // Font deleted successfully, remove it from the fontNames state
+          setFontNames(prevFontNames => prevFontNames.filter(name => name !== fontName));
+        } else {
+          console.error("Failed to delete font:", response.status);
+        }
+      })
+      .catch(error => {
+        console.error("Error deleting font:", error);
+      });
   };
 
   return (
@@ -47,7 +60,7 @@ const FontList = () => {
         columns={columns}
         data={fontNames.map(name => ({ name }))} // Format data as array of objects
         pagination
-        paginationPerPage={10}
+        paginationPerPage={5}
         paginationRowsPerPageOptions={[10, 20, 30]}
       />
      
