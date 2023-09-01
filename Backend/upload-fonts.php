@@ -31,7 +31,7 @@ if (!$conn) {
         $response = $fonts;
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle POST request to add a new font
-        $fontToAdd = $_POST['fontName']; // You can adjust the form field name as needed
+        $fontToAdd = $_POST['fontName']; // Adjust the form field name as needed
 
         // Use prepared statements to prevent SQL injection
         $insertQuery = "INSERT INTO uploaded_fonts (font_name) VALUES (?)";

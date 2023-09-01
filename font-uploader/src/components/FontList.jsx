@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import FontGroup from "./FontGroup";
 
@@ -7,6 +7,7 @@ const FontList = () => {
   const [showCreateGroupModal, setShowCreateGroupModal] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [selectedFonts, setSelectedFonts] = useState([]);
+
 
   useEffect(() => {
     // Fetch the list of font names from the backend
@@ -88,18 +89,48 @@ const FontList = () => {
     );
   };
 
-  const handleSaveGroup = () => {
-    // Create a new font group object with the group name and selected fonts
-    const newFontGroup = {
-      name: groupName,
-      fonts: selectedFonts,
-    };
+  const handleSaveGroup = async () => {
+    // Ensure that groupName is not empty
+    if (!groupName) {
+        // Handle the case where the groupName is missing or empty
+        console.error("Group name is required.");
+        return; // Do not proceed with the request
+    }
 
-    // TODO: Send the newFontGroup to your backend or store it as needed
+    const formData = new FormData();
 
-    // Close the Create Group modal
-    toggleCreateGroupModal();
-  };
+    // Append the group name
+    formData.append('groupName', groupName, );
+
+    // Append selected fonts as an array
+
+    selectedFonts.forEach((fontName) => {
+      formData.append('fonts[]', fontName);
+    });
+
+    try {
+        const response = await fetch("http://localhost/font-uploader-server/font-groups.php", {
+            method: "POST",
+            body: formData,
+        });
+
+        if (response.ok) {
+            // Handle successful upload
+            const responseData = await response.json();
+            console.log(responseData); // Log the server response if needed
+        } else {
+            // Handle upload error
+            console.error("Error adding font group:", response.status);
+        }
+    } catch (error) {
+        console.error("Error adding font group:", error);
+    }
+};
+
+
+
+
+  console.log(groupName)
 
   return (
     <div className="mt-16">
