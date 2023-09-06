@@ -125,6 +125,7 @@ const FontList = () => {
     } catch (error) {
         console.error("Error adding font group:", error);
     }
+    
 };
 
 
