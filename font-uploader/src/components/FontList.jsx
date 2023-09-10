@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import FontGroup from "./FontGroup";
+import FontGroupTable from "./FontGroupTable";
 
 const FontList = () => {
   const [fontNames, setFontNames] = useState([]);
@@ -160,6 +161,7 @@ const FontList = () => {
           onCancel={toggleCreateGroupModal}
         />
       )}
+      <FontGroupTable fontNames={fontNames}/>
     </div>
   );
 };

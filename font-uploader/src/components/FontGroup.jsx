@@ -43,7 +43,7 @@ const FontGroup = ({
           <h3 className="text-lg font-semibold mb-2">Remaining Fonts</h3>
           {fontList.map((font) => (
             <div key={font} className="flex items-center justify-between py-1">
-              <span>{font}</span>
+              <span>{font.replace('.ttf', '')}</span>
               <button
                 onClick={() => onFontSelection(font)}
                 className="text-blue-500 hover:text-blue-600"

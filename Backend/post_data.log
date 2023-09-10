@@ -1,0 +1,10 @@
+Array
+(
+    [groupName] => g1
+    [fontName] => Array
+        (
+            [0] => Baby Girly.ttf
+            [1] => WinterSong-owRGB.ttf
+        )
+
+)
