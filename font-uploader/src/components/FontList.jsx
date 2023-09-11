@@ -20,7 +20,7 @@ const FontList = () => {
       .catch((error) => {
         console.error("Error fetching font names:", error);
       });
-  }, []);
+  }, [fontNames]);
 
   const columns = [
     {
@@ -73,8 +73,8 @@ const FontList = () => {
 
   const toggleCreateGroupModal = () => {
     setShowCreateGroupModal(!showCreateGroupModal);
-    setGroupName(""); // Clear the group name input when the modal is toggled
-    setSelectedFonts([]); // Clear selected fonts when the modal is toggled
+    setGroupName("");
+    setSelectedFonts([]); 
   };
 
   const handleFontSelection = (fontName) => {
@@ -95,7 +95,7 @@ const FontList = () => {
     if (!groupName) {
         // Handle the case where the groupName is missing or empty
         console.error("Group name is required.");
-        return; // Do not proceed with the request
+        return; 
     }
 
     const formData = new FormData();
@@ -118,7 +118,9 @@ const FontList = () => {
         if (response.ok) {
             // Handle successful upload
             const responseData = await response.json();
-            console.log(responseData); // Log the server response if needed
+            console.log(responseData); 
+            setShowCreateGroupModal(false);
+
         } else {
             // Handle upload error
             console.error("Error adding font group:", response.status);
@@ -126,7 +128,7 @@ const FontList = () => {
     } catch (error) {
         console.error("Error adding font group:", error);
     }
-    
+
 };
 
 

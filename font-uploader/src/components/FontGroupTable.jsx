@@ -39,7 +39,7 @@ const FontGroupTable = ({ fontNames }) => {
 
     const refreshInterval = setInterval(() => {
       fetchFontGroups();
-    }, 60000);
+    }, 1000);
 
     return () => clearInterval(refreshInterval);
   }, []);
@@ -100,8 +100,9 @@ const FontGroupTable = ({ fontNames }) => {
         // Handle successful update
         const responseData = await response.json();
         console.log(responseData); // Log the server response if needed
-        setIsModalOpen(false);
+       
         fetchFontGroups(); // Refresh the font groups after updating
+        setIsModalOpen(false);
       } else {
         // Handle update error
         console.error("Error updating font group:", response.status);
@@ -109,6 +110,7 @@ const FontGroupTable = ({ fontNames }) => {
     } catch (error) {
       console.error("Error updating font group:", error);
     }
+
   };
 
 
