@@ -191,8 +191,8 @@ const FontGroupTable = ({ fontNames }) => {
       />
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-md">
+        <div className="fixed inset-0 flex items-center justify-center  z-50">
+          <div className="bg-[#053B50] text-white p-4 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="text-2xl font-semibold mb-4">Edit Font Group</h2>
             <label className="block mb-2">
               Group Name:
@@ -205,18 +205,18 @@ const FontGroupTable = ({ fontNames }) => {
                 disabled
               />
             </label>
-            <button onClick={handleAddNewFontClick}>+ Add new font</button>
+            <button className='button-12 my-4' onClick={handleAddNewFontClick}>+ Add new font</button>
             {isAddingNewFont && (
               <div>
                 
                 <div className="mb-4">
-              <h3 className="text-lg font-semibold mb-2">Selected Fonts</h3>
+              <h3 className="text-lg font-semibold mb-2 ">Selected Fonts</h3>
               {selectedFonts.map((font) => (
                 <div key={font} className="flex items-center justify-between py-1">
                   <span>{font.replace('.ttf', '')}</span>
                   <button
                     onClick={() => handleFontDeselection(font)}
-                    className="text-red-500 hover:text-red-600"
+                    className="bg-red-500 p-1 rounded text-sm hover:text-red-600"
                   >
                     Deselect
                   </button>
@@ -224,13 +224,13 @@ const FontGroupTable = ({ fontNames }) => {
               ))}
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">Remaining Fonts</h3>
+              <h3 className="text-lg font-semibold mb-2 ">Remaining Fonts</h3>
               {remainingFonts.map((font) => (
                 <div key={font} className="flex items-center justify-between py-1">
                   <span>{font.replace('.ttf', '')}</span>
                   <button
                     onClick={() => handleFontSelection(font)}
-                    className="text-blue-500 hover:text-blue-600"
+                    className="text-blue-500 hover:text-blue-600 button-12"
                   >
                     Select
                   </button>
@@ -240,13 +240,13 @@ const FontGroupTable = ({ fontNames }) => {
             <div className="mt-4 flex justify-end">
               <button
                 onClick={onSaveGroup}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2"
+                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 mr-2 button-29"
               >
                 Save Group
               </button>
               <button
                 onClick={onCancel}
-                className="bg-gray-300 text-gray-600 px-4 py-2 rounded-md hover:bg-gray-400"
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-gray-400"
               >
                 Cancel
               </button>

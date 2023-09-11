@@ -147,7 +147,7 @@ const FontList = () => {
         paginationRowsPerPageOptions={[10, 20, 30]}
       />
       <div className="text-right mt-10">
-        <button onClick={toggleCreateGroupModal}>Create Group</button>
+        <button className="button-14" onClick={toggleCreateGroupModal}>Create Group</button>
       </div>
 
       {/* Render the Create Group modal */}
